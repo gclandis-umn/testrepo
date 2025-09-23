@@ -533,19 +533,23 @@ We need to make sure that we can understand what our data look like before doing
 **Looking at the top/bottom of your dataset** First we can view what our data look like using `head()` and `tail()` to see the beginning and end of our data. they both use a similar format `head(dataframe, # of rows )` We'll use the diamonds dataframe (need to install ggplot if you haven't already!)
 
 ```{r}
-
+mean()
 ```
 
 ```{r}
-
+tail(mtcars)
+tail(mtcars, 1)
 ```
+hypothetically, we have a dataset with 1000 rows. can we just get rows 50-100?
+yes.
 
 This lets us see just part of our data to make sure it loaded appropriately/is what we expect.
 
 **Summary** We can also describe our data using a function called `summary()`.
 
 ```{r}
-
+summary(mtcars) #on a dataset
+summary(mtcars$mpg) #on a variable
 ```
 
 What do you notice about the summaries?
@@ -559,31 +563,35 @@ There are **many** functions to summarize data, and we'll use more as the semest
 If we need the # of observations, we can use `length()` or `nrow()` to get this information.
 
 ```{r}
-
+length(mtcars$mpg) #works on single dimension
+length(mtcars) #gives number of columns
+nrow(mtcars) #number of rows
+ncol(mtcars) #number of columns
 ```
 
 We can also take the average by using the function `mean()`.
 
 ```{r}
-
+mean(mtcars$mpg) #expected value for a variable
 ```
 
 We can get the standard deviation using `sd()`.
 
 ```{r}
-
+sd(mtcars$mpg) #typical distance from the mean
 ```
 
 `var()`gives us the variance
 
 ```{r}
-
+var(mtcars$mpg)
 ```
 
 `range()` gives us the range
 
 ```{r}
-
+range(mtcars$mpg) #subtract 2 values
+33.9-10.4
 
 ```
 
@@ -591,27 +599,40 @@ We can get the standard deviation using `sd()`.
 
 1. Summarize the ChickWeight dataset
 ```{r}
-
+summary(ChickWeight)
+summary(ChickWeight$Chick)
 ```
 
 2.  Find the mean of the weight column
 
 ```{r}
-
+mean(ChickWeight$weight)
 ```
 
 3.  Summarize the data for just the 1st chick
 
 ```{r}
+summary(ChickWeight %>% filter(Chick==1))
+summary(ChickWeight[ChickWeight$Chick==1,])
+summary(subset(ChickWeight, ChickWeight$Chick==1))
 ```
 
 4.  What is the variance of the 1st chick's weight?
 
 ```{r}
-
+summary(ChickWeight %>% filter(Chick==1))
+var(ChickOne$Weight)
 ```
 
 5.  What is the range in weight for each chick posted in the dataset?
 ```{r}
-
+range(ChickWeight$weight[ChickWeight==1])
+range(ChickWeight$weight[ChickWeight==2])
+range(ChickWeight$weight[ChickWeight==3])
+range(ChickWeight$weight[ChickWeight==4])
+range(ChickWeight$weight[ChickWeight==5])
+range(ChickWeight$weight[ChickWeight==6])
+range(ChickWeight$weight[ChickWeight==7])
+range(ChickWeight$weight[ChickWeight==8])
+#for next time!
 ```
