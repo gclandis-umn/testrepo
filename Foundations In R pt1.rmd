@@ -428,7 +428,9 @@ portion of the data.
 For instance, we could use indexing to get only cars in the mtcars dataset with 4 gears.
 
 ```{r}
-
+mtcars[mtcars$gear==4,]
+fourGear<- mtcars[mtcars$gear==4,]
+#selective about row, but want all info across the columns
 ```
 
 In this case, you'll notice that I put a comma after the logical statement. This is because we want all of the **rows** where the car has 4 gears.
@@ -439,8 +441,29 @@ If we wanted to get the same subset of data as above, we could do the following:
 
 ```{r}
 #five gears and 6 cyl
+fiveGearSixCyl<- subset(mtcars, mtcars$gear== 5 & mtcars$cyl==6)
+fiveGearSixCyl
 ```
 can combine logical statements in all the ways we talked about before
+
+## Practice
+1. create a subset of data from mycars that contains all cars with less than 25 mpg.
+```{r}
+lessthan225mpg<- subset(mtcars, mtcars$mpg< 25)
+```
+
+2. create a subset of data with all cars that have an automatic transmission.
+```{r}
+subset(mtcars, mtcars$am<1)
+class(mtcars$am)
+subset(mtcars, mtcars$am==0)
+```
+
+3. create a subset of data with all cars that have at least 100 horsepower and 4 gears.
+```{r}
+carhpg<- subset(mtcars, mtcars$hp>=100 & mtcars$gear==4)
+```
+
 
 **A Note on Pipes (more advanced)** If not, we're going to talk about another way to get a subset of data from our dataframe.
 
@@ -460,41 +483,47 @@ We can use filter and select to subset data with pipes.
 We can use `filter()` to pick a subset of rows:
 
 ```{r}
-
+mtcars %>% filter(gear==5)
+gearFive<- mtcars %>% filter(gear==5)
 ```
 
 We can use `select()` to pick a subset of columns:
 
 ```{r}
-
+mtcars %>%  select(mpg, hp)
 ```
 
 
 ```{r}
-
+mtcars %>% 
+  filter(gear==5) %>% 
+  select(mpg, hp)
+## or
+filter(mtcars, mtcars$gear==5)
 ```
 
 #### Learning Outcome 4 Practice: 
 
 1. Load the ChickWeight dataset.
 ```{r}
-
+data(ChickWeight)
 ```
 
 2.  Create a subset of data that contains information for Chick 8
 
 ```{r}
-
+ChickWeight %>% filter(Chick==8)
 ```
 
 3.  Create a subset of data for Diet 2 only.
 ```{r}
-
+ChickWeight %>% filter(Diet==2)
 ```
 
 4.  Create a subset of data for all chicks weighing less than 100 gm.
 ```{r}
-
+lightWeight<- subset(ChickWeight, weight<100)
+lightWEight
 ```
 
 ### Learning Outcome 5: Describe your data effectively
